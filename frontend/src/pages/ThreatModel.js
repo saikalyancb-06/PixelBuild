@@ -14,11 +14,6 @@ function ThreatModel() {
         Threat Model & System Analysis
       </Typography>
 
-      <Alert severity="info" sx={{ mb: 3 }}>
-        <strong>Academic Prototype Notice:</strong> This is an educational system developed for hackathon purposes. 
-        It demonstrates detection concepts and is not a production-ready security solution.
-      </Alert>
-
       <Grid container spacing={3}>
         {/* Attacker Profile */}
         <Grid item xs={12} md={6}>
