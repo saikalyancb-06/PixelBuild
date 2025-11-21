@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from typing import List, Optional
 from database import get_db
 from models.database_models import Detection, SuspiciousApp, Brand
@@ -18,7 +18,10 @@ async def list_detections(
     db: Session = Depends(get_db)
 ):
     """List all detections with filters"""
-    query = db.query(Detection)
+    query = db.query(Detection).options(
+        joinedload(Detection.suspicious_app),
+        joinedload(Detection.brand)
+    )
     
     if min_confidence > 0:
         query = query.filter(Detection.confidence_score >= min_confidence)

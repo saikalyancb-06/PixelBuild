@@ -1,0 +1,95 @@
+Subject: Urgent Takedown Request - Counterfeit App Impersonating HDFC Bank
+
+To: Google Play Support / App Store Review Team
+CC: abuse@google.com
+
+Dear Security Team,
+
+We are reporting a counterfeit application that is impersonating the legitimate brand "HDFC Bank". This fake app poses significant security risks to users and damages the brand's reputation.
+
+FAKE APP DETAILS:
+-------------------
+App Name: Fake Banking App
+Package ID: com.bank.update.secure
+Developer Name: Unknown Developer
+Store URL: https://play.google.com/store/apps/details?id=com.bank.update.secure
+Reported Downloads: 10,000+
+First Detected: November 20, 2025
+
+LEGITIMATE BRAND DETAILS:
+-------------------------
+Official Brand: HDFC Bank
+Official Package ID(s): 
+  - com.snapwork.hdfc
+  - com.hdfcbank.payzapp
+Official Developer: HDFC Bank Ltd.
+Category: Banking/UPI
+
+EVIDENCE OF IMPERSONATION:
+--------------------------
+1. Name Similarity: 86% match - clearly attempting to deceive users into believing this is the legitimate HDFC Bank app
+
+2. Package ID Mismatch: The fake app's package ID "com.bank.update.secure" does not match any official packages (com.snapwork.hdfc, com.hdfcbank.payzapp)
+
+3. Developer Name Mismatch: Listed developer "Unknown Developer" does not match the legitimate brand owner "HDFC Bank Ltd."
+
+4. Icon Similarity: 85% visual match - fake app uses nearly identical logo to official HDFC Bank app
+
+5. Certificate Mismatch: APK signing certificate differs from official app (SHA256: ABCD1234... vs EFGH5678...)
+
+6. Risk Score: 92/100 - HIGH CONFIDENCE fake detection by our automated system
+
+SECURITY IMPACT:
+----------------
+This counterfeit app poses serious risks:
+• User credential theft (username, password, UPI PIN)
+• Financial fraud through unauthorized transactions
+• Personal data exfiltration
+• Brand reputation damage for HDFC Bank
+• User trust erosion in the mobile banking ecosystem
+
+With 10,000+ reported downloads, this fake app has potentially compromised thousands of users' financial data.
+
+REQUESTED ACTION:
+----------------
+We request immediate removal of this counterfeit application from the Google Play Store under the following policies:
+- Impersonation Policy
+- Deceptive Behavior Policy
+- Intellectual Property Violation
+- User Security Protection
+
+SUPPORTING EVIDENCE:
+--------------------
+Attached:
+1. Side-by-side icon comparison (fake vs legitimate)
+2. Package ID verification proof
+3. Developer authentication records
+4. Screenshot comparisons showing UI similarities
+5. Complete evidence package (JSON format)
+
+FOLLOW-UP MONITORING:
+---------------------
+We will monitor for:
+- Re-uploads under different package names
+- Similar variants using typosquatting
+- Same developer publishing other fake apps
+
+We request notification of the takedown action and any additional information about the developer account.
+
+CONTACT INFORMATION:
+--------------------
+For verification or additional evidence:
+- Security Team: security@shieldguardai.com
+- Case ID: DET-0006
+- Detection Date: November 21, 2025
+- System: ShieldGuard AI v1.0.0
+
+We appreciate your prompt attention to this critical security matter and your partnership in protecting users from financial fraud.
+
+Thank you for your cooperation.
+
+Best regards,
+ShieldGuard AI Security Team
+
+---
+This is an auto-generated takedown request based on evidence collected by the ShieldGuard AI detection system. All evidence has been independently verified and is available for review.

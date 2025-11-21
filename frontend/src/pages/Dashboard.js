@@ -14,7 +14,7 @@ import {
   CheckCircle,
   TrendingUp,
 } from '@mui/icons-material';
-import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line, Area, AreaChart } from 'recharts';
 import { metricsAPI, detectionsAPI } from '../services/api';
 
 const COLORS = ['#ff5252', '#ff9800', '#ffc107', '#4caf50'];
@@ -54,11 +54,32 @@ export default function Dashboard() {
     value,
   }));
 
+  // Mock trend data for detections over time (last 7 days)
+  const trendData = [
+    { date: 'Nov 15', detections: 2, fakes: 1 },
+    { date: 'Nov 16', detections: 3, fakes: 1 },
+    { date: 'Nov 17', detections: 1, fakes: 0 },
+    { date: 'Nov 18', detections: 4, fakes: 2 },
+    { date: 'Nov 19', detections: 3, fakes: 2 },
+    { date: 'Nov 20', detections: 5, fakes: 3 },
+    { date: 'Nov 21', detections: 7, fakes: 4 },
+  ];
+
   return (
     <Box>
-      <Typography variant="h4" gutterBottom>
-        Dashboard
-      </Typography>
+      <Box sx={{ mb: 4 }}>
+        <Typography variant="h4" gutterBottom fontWeight="bold" sx={{ 
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text'
+        }}>
+          Welcome to ShieldGuard AI
+        </Typography>
+        <Typography variant="body1" color="text.secondary">
+          Your intelligent defense against counterfeit mobile applications
+        </Typography>
+      </Box>
 
       <Grid container spacing={3}>
         {/* Metric Cards */}
@@ -209,6 +230,50 @@ export default function Dashboard() {
                 </Typography>
               </Box>
             </Box>
+          </Paper>
+        </Grid>
+
+        {/* Detection Trend Over Time */}
+        <Grid item xs={12}>
+          <Paper sx={{ p: 3 }}>
+            <Typography variant="h6" gutterBottom>
+              Detection Trend (Last 7 Days)
+            </Typography>
+            <ResponsiveContainer width="100%" height={300}>
+              <AreaChart data={trendData}>
+                <defs>
+                  <linearGradient id="colorDetections" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#667eea" stopOpacity={0.8}/>
+                    <stop offset="95%" stopColor="#667eea" stopOpacity={0}/>
+                  </linearGradient>
+                  <linearGradient id="colorFakes" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#f44336" stopOpacity={0.8}/>
+                    <stop offset="95%" stopColor="#f44336" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="date" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Area 
+                  type="monotone" 
+                  dataKey="detections" 
+                  stroke="#667eea" 
+                  fillOpacity={1} 
+                  fill="url(#colorDetections)"
+                  name="Total Detections"
+                />
+                <Area 
+                  type="monotone" 
+                  dataKey="fakes" 
+                  stroke="#f44336" 
+                  fillOpacity={1} 
+                  fill="url(#colorFakes)"
+                  name="Fake Apps"
+                />
+              </AreaChart>
+            </ResponsiveContainer>
           </Paper>
         </Grid>
       </Grid>

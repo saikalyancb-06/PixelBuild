@@ -50,6 +50,8 @@ class DetectionResponse(BaseModel):
     detection_reasons: List[str]
     status: str
     detected_at: datetime
+    suspicious_app: Optional[SuspiciousAppResponse] = None
+    brand: Optional[BrandResponse] = None
 
     class Config:
         from_attributes = True

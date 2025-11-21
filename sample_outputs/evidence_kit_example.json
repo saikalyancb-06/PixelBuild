@@ -1,0 +1,136 @@
+{
+  "detection_id": 6,
+  "timestamp": "2025-11-21T10:30:00Z",
+  "detection_summary": {
+    "is_fake": true,
+    "risk_level": "HIGH",
+    "risk_score": 92,
+    "detection_date": "2025-11-21T10:30:00Z",
+    "detection_status": "confirmed"
+  },
+  "suspicious_app": {
+    "app_name": "Fake Banking App",
+    "package_id": "com.bank.update.secure",
+    "developer_name": "Unknown Developer",
+    "store_url": "https://play.google.com/store/apps/details?id=com.bank.update.secure",
+    "icon_url": "https://play-lh.googleusercontent.com/fake_banking_icon",
+    "download_count": "10,000+",
+    "rating": 4.2,
+    "first_detected": "2025-11-20T14:22:00Z"
+  },
+  "legitimate_brand": {
+    "brand_name": "HDFC Bank",
+    "official_package_ids": [
+      "com.snapwork.hdfc",
+      "com.hdfcbank.payzapp"
+    ],
+    "official_developer": "HDFC Bank Ltd.",
+    "official_icon_url": "https://play-lh.googleusercontent.com/hdfc_bank_icon",
+    "category": "Banking/UPI"
+  },
+  "similarity_analysis": {
+    "name_similarity": 0.86,
+    "name_similarity_method": "Levenshtein distance",
+    "icon_similarity": 0.85,
+    "icon_similarity_method": "Visual comparison (estimated)",
+    "package_similarity": 0.75,
+    "package_similarity_notes": "Package structure differs from official",
+    "developer_match": false,
+    "overall_risk_score": 0.92
+  },
+  "red_flags": [
+    {
+      "severity": "HIGH",
+      "category": "name_similarity",
+      "description": "App name 'Fake Banking App' is 86% similar to 'HDFC Bank'"
+    },
+    {
+      "severity": "CRITICAL",
+      "category": "package_mismatch",
+      "description": "Package ID 'com.bank.update.secure' does not match any official packages: [com.snapwork.hdfc, com.hdfcbank.payzapp]"
+    },
+    {
+      "severity": "HIGH",
+      "category": "developer_fraud",
+      "description": "Developer name 'Unknown Developer' does not match official: 'HDFC Bank Ltd.'"
+    },
+    {
+      "severity": "MEDIUM",
+      "category": "certificate",
+      "description": "Certificate mismatch detected - signing key differs from official app"
+    },
+    {
+      "severity": "HIGH",
+      "category": "suspicious_permissions",
+      "description": "App requests sensitive permissions typical of financial malware"
+    }
+  ],
+  "evidence_attachments": {
+    "app_icon_base64": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
+    "official_icon_base64": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==",
+    "screenshots": [],
+    "certificate_info": {
+      "fake_app_signature": "SHA256:ABCD1234...",
+      "official_app_signature": "SHA256:EFGH5678...",
+      "signatures_match": false
+    }
+  },
+  "impact_assessment": {
+    "estimated_downloads": "10,000+",
+    "potential_victims": "Approximately 10,000-50,000 users",
+    "risk_to_users": [
+      "Credential theft (username/password)",
+      "Financial fraud (unauthorized transactions)",
+      "UPI PIN compromise",
+      "Personal data exfiltration"
+    ],
+    "risk_to_brand": [
+      "Reputation damage",
+      "User trust erosion",
+      "Regulatory scrutiny",
+      "Financial liability"
+    ]
+  },
+  "recommended_actions": [
+    {
+      "priority": 1,
+      "action": "Immediate takedown request to Google Play Store",
+      "responsible_party": "Security Team / Legal Department"
+    },
+    {
+      "priority": 2,
+      "action": "User notification campaign (email/SMS to potential victims)",
+      "responsible_party": "Customer Support / Communications Team"
+    },
+    {
+      "priority": 3,
+      "action": "Escalate to law enforcement (cybercrime division)",
+      "responsible_party": "Legal Department"
+    },
+    {
+      "priority": 4,
+      "action": "Monitor for re-uploads under different package names",
+      "responsible_party": "Security Team"
+    }
+  ],
+  "takedown_request": {
+    "subject": "Urgent Takedown Request - Counterfeit App Impersonating HDFC Bank",
+    "recipient": "Google Play Support / App Store Review Team",
+    "body": "See takedown_email_template.txt for full content",
+    "attachments": [
+      "Side-by-side icon comparison",
+      "Package ID mismatch evidence",
+      "Developer verification proof",
+      "Screenshot comparisons"
+    ]
+  },
+  "metadata": {
+    "generated_by": "ShieldGuard AI - Evidence Kit Generator",
+    "version": "1.0.0",
+    "generation_timestamp": "2025-11-21T10:30:00Z",
+    "detector_version": "1.0.0",
+    "confidence_score": 0.92,
+    "manual_review_required": false,
+    "review_status": "pending"
+  }
+}

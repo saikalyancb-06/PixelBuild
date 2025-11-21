@@ -42,6 +42,24 @@ def simple_text_similarity(str1, str2):
     max_len = max(len(str1), len(str2))
     return 1 - (distance / max_len)
 
+# Suspicious keywords commonly used in fake apps
+SUSPICIOUS_KEYWORDS = [
+    'update', 'official', 'pro', 'premium', 'secure', 'verified', 
+    'original', 'real', 'authentic', 'new', 'latest', 'free', 
+    'unlock', 'mod', 'hack', 'cracked', 'plus', 'gold'
+]
+
+def detect_suspicious_keywords(app_name: str) -> list:
+    """Detect suspicious keywords in app name that fake apps commonly use"""
+    app_name_lower = app_name.lower()
+    found_keywords = []
+    
+    for keyword in SUSPICIOUS_KEYWORDS:
+        if keyword in app_name_lower:
+            found_keywords.append(keyword.title())
+    
+    return found_keywords
+
 router = APIRouter()
 
 class QuickCheckRequest(BaseModel):
@@ -249,6 +267,9 @@ async def quick_check(request: QuickCheckRequest, db: Session = Depends(get_db))
     max_similarity = 0
     best_match_brand = None
     
+    # Detect suspicious keywords in app name
+    suspicious_keywords = detect_suspicious_keywords(app_name)
+    
     # Check against all brands
     for brand in brands:
         # Compare app name with brand name
@@ -292,6 +313,11 @@ async def quick_check(request: QuickCheckRequest, db: Session = Depends(get_db))
                 # Name is very similar but package ID doesn't match = FAKE
                 is_fake = True
                 risk_score = int(max_similarity * 100)
+                
+                # Add suspicious keyword boost to risk
+                if suspicious_keywords:
+                    risk_score = min(100, risk_score + len(suspicious_keywords) * 5)
+                
                 reasons.append(f"⚠️ WARNING: App name very similar to {best_match_brand.name}")
                 reasons.append(f"✗ Package ID does NOT match official app!")
                 if brand_pkg_ids:
@@ -299,6 +325,11 @@ async def quick_check(request: QuickCheckRequest, db: Session = Depends(get_db))
                 reasons.append(f"This package: {package_id}")
                 if developer != "Unknown":
                     reasons.append(f"Developer: {developer}")
+                
+                # Add suspicious keywords warning
+                if suspicious_keywords:
+                    reasons.append(f"⚠️ Suspicious keywords found: {', '.join(suspicious_keywords)}")
+                
                 matched_brand = best_match_brand.name
     
     elif max_similarity > 0.50:

@@ -1,0 +1,183 @@
+{
+  "detection_results": [
+    {
+      "url": "https://play.google.com/store/apps/details?id=com.whatsapp",
+      "is_fake": false,
+      "verdict": "LEGITIMATE",
+      "app_name": "WhatsApp Messenger",
+      "package_id": "com.whatsapp",
+      "developer": "WhatsApp LLC",
+      "risk_score": 0,
+      "confidence": 1.0,
+      "matched_brand": "WhatsApp",
+      "detection_time_ms": 1850,
+      "reasons": [
+        "✓ This is the official WhatsApp app",
+        "✓ Package ID verified: com.whatsapp",
+        "✓ Developer: WhatsApp LLC",
+        "✓ Database match confirmed"
+      ],
+      "detailed_analysis": {
+        "name_similarity": 1.0,
+        "package_verification": "exact_match",
+        "developer_verification": "confirmed",
+        "database_status": "verified_brand"
+      }
+    },
+    {
+      "url": "https://play.google.com/store/apps/details?id=com.whatsap",
+      "is_fake": true,
+      "verdict": "FAKE",
+      "app_name": "WhatsApp Update",
+      "package_id": "com.whatsap",
+      "developer": "Unknown Developer",
+      "risk_score": 95,
+      "confidence": 0.95,
+      "matched_brand": "WhatsApp",
+      "detection_time_ms": 2100,
+      "reasons": [
+        "⚠ App name 'WhatsApp Update' is 87% similar to 'WhatsApp'",
+        "⚠ Package ID mismatch - not in verified list",
+        "⚠ Developer name does not match official: 'WhatsApp LLC'",
+        "⚠ Suspicious keyword: 'Update' commonly used in fake apps"
+      ],
+      "detailed_analysis": {
+        "name_similarity": 0.87,
+        "package_verification": "mismatch",
+        "developer_verification": "failed",
+        "database_status": "not_verified",
+        "typosquatting_detected": true,
+        "suspicious_keywords": ["update"]
+      }
+    },
+    {
+      "url": "https://play.google.com/store/apps/details?id=com.netflix.mediaclient",
+      "is_fake": false,
+      "verdict": "LEGITIMATE",
+      "app_name": "Netflix",
+      "package_id": "com.netflix.mediaclient",
+      "developer": "Netflix, Inc.",
+      "risk_score": 0,
+      "confidence": 1.0,
+      "matched_brand": "Netflix",
+      "detection_time_ms": 1650,
+      "reasons": [
+        "✓ This is the official Netflix app",
+        "✓ Package ID verified: com.netflix.mediaclient",
+        "✓ Developer: Netflix, Inc.",
+        "✓ Database match confirmed"
+      ],
+      "detailed_analysis": {
+        "name_similarity": 1.0,
+        "package_verification": "exact_match",
+        "developer_verification": "confirmed",
+        "database_status": "verified_brand"
+      }
+    },
+    {
+      "url": "https://play.google.com/store/apps/details?id=com.paypal.fake",
+      "is_fake": true,
+      "verdict": "FAKE",
+      "app_name": "PayPal Secure",
+      "package_id": "com.paypal.fake",
+      "developer": "Payment Solutions Inc.",
+      "risk_score": 94,
+      "confidence": 0.94,
+      "matched_brand": "PayPal",
+      "detection_time_ms": 2200,
+      "reasons": [
+        "⚠ App name 'PayPal Secure' is 92% similar to 'PayPal'",
+        "⚠ Package ID mismatch - not in verified list",
+        "⚠ Developer name does not match official: 'PayPal Mobile'",
+        "⚠ Suspicious keyword: 'Secure' commonly used to build false trust"
+      ],
+      "detailed_analysis": {
+        "name_similarity": 0.92,
+        "package_verification": "mismatch",
+        "developer_verification": "failed",
+        "database_status": "not_verified",
+        "suspicious_keywords": ["secure"]
+      }
+    },
+    {
+      "url": "https://play.google.com/store/apps/details?id=com.phonepe.app",
+      "is_fake": false,
+      "verdict": "LEGITIMATE",
+      "app_name": "PhonePe UPI, Payment, Recharge",
+      "package_id": "com.phonepe.app",
+      "developer": "PhonePe Private Limited",
+      "risk_score": 0,
+      "confidence": 1.0,
+      "matched_brand": "PhonePe",
+      "detection_time_ms": 1920,
+      "reasons": [
+        "✓ This is the official PhonePe app",
+        "✓ Package ID verified: com.phonepe.app",
+        "✓ Developer: PhonePe Private Limited",
+        "✓ Database match confirmed"
+      ],
+      "detailed_analysis": {
+        "name_similarity": 1.0,
+        "package_verification": "exact_match",
+        "developer_verification": "confirmed",
+        "database_status": "verified_brand"
+      }
+    },
+    {
+      "url": "https://play.google.com/store/apps/details?id=com.amazon.mshop.fake",
+      "is_fake": true,
+      "verdict": "FAKE",
+      "app_name": "Amazon Shopping Official",
+      "package_id": "com.amazon.mshop.fake",
+      "developer": "E-commerce Solutions",
+      "risk_score": 89,
+      "confidence": 0.89,
+      "matched_brand": "Amazon",
+      "detection_time_ms": 2050,
+      "reasons": [
+        "⚠ App name 'Amazon Shopping Official' is 93% similar to 'Amazon Shopping'",
+        "⚠ Package ID mismatch - not in verified list",
+        "⚠ Developer name does not match official: 'Amazon Mobile LLC'",
+        "⚠ Suspicious keyword: 'Official' commonly used to appear legitimate"
+      ],
+      "detailed_analysis": {
+        "name_similarity": 0.93,
+        "package_verification": "mismatch",
+        "developer_verification": "failed",
+        "database_status": "not_verified",
+        "suspicious_keywords": ["official"]
+      }
+    }
+  ],
+  "summary": {
+    "total_checks": 6,
+    "legitimate_apps": 3,
+    "fake_apps": 3,
+    "average_detection_time_ms": 1962,
+    "brands_tested": [
+      "WhatsApp",
+      "Netflix",
+      "PayPal",
+      "PhonePe",
+      "Amazon"
+    ],
+    "detection_accuracy": {
+      "true_positives": 3,
+      "true_negatives": 3,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0
+    }
+  },
+  "system_info": {
+    "detector_version": "ShieldGuard AI v1.0.0",
+    "detection_method": "Multi-factor analysis (name + package + developer)",
+    "database_brands": 86,
+    "execution_timestamp": "2025-11-21T10:30:00Z",
+    "backend_version": "FastAPI 0.121.3",
+    "scraping_engine": "BeautifulSoup4 4.14.2"
+  }
+}

@@ -4,7 +4,7 @@ from pydantic import BaseModel
 from typing import List, Optional
 import uvicorn
 
-from api.routes import brands, detections, scans, takedowns, metrics, quick_check
+from api.routes import brands, detections, scans, takedowns, metrics, quick_check, evidence_kit
 from database import engine, Base
 
 # Create database tables
@@ -32,6 +32,7 @@ app.include_router(detections.router, prefix="/api/detections", tags=["Detection
 app.include_router(takedowns.router, prefix="/api/takedowns", tags=["Takedowns"])
 app.include_router(metrics.router, prefix="/api/metrics", tags=["Metrics"])
 app.include_router(quick_check.router, tags=["Quick Check"])
+app.include_router(evidence_kit.router, tags=["Evidence Kit"])
 
 
 @app.get("/")

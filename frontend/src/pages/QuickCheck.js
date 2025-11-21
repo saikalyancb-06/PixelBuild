@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Container,
   Paper,
@@ -12,22 +12,58 @@ import {
   CardContent,
   Chip,
   Grid,
-  Divider
+  Divider,
+  IconButton,
+  Tooltip
 } from '@mui/material';
 import {
   Search as SearchIcon,
   CheckCircle as CheckCircleIcon,
   Warning as WarningIcon,
   Error as ErrorIcon,
-  Shield as ShieldIcon
+  Shield as ShieldIcon,
+  Refresh as RefreshIcon,
+  History as HistoryIcon
 } from '@mui/icons-material';
 import axios from 'axios';
+import RiskBadge from '../components/RiskBadge';
+import { useNotification } from '../components/NotificationContext';
 
 const QuickCheck = () => {
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
+  const [recentChecks, setRecentChecks] = useState([]);
+  const { showNotification } = useNotification();
+
+  // Load recent checks from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('recentChecks');
+    if (saved) {
+      try {
+        setRecentChecks(JSON.parse(saved));
+      } catch (e) {
+        console.error('Failed to load recent checks:', e);
+      }
+    }
+  }, []);
+
+  // Save recent check to history
+  const saveRecentCheck = (checkData) => {
+    const newCheck = {
+      url: checkData.url || url,
+      app_name: checkData.app_name,
+      package_id: checkData.package_id,
+      risk_score: checkData.risk_score,
+      is_fake: checkData.is_fake,
+      timestamp: new Date().toISOString()
+    };
+    
+    const updated = [newCheck, ...recentChecks.filter(c => c.package_id !== newCheck.package_id)].slice(0, 5);
+    setRecentChecks(updated);
+    localStorage.setItem('recentChecks', JSON.stringify(updated));
+  };
 
   const getRiskColor = (score) => {
     if (score >= 90) return '#d32f2f'; // Red - Critical
@@ -59,8 +95,18 @@ const QuickCheck = () => {
       });
       
       setResult(response.data);
+      saveRecentCheck({ ...response.data, url: url.trim() });
+      
+      // Show success notification
+      if (response.data.is_fake) {
+        showNotification(`⚠️ Fake app detected: ${response.data.app_name}`, 'error');
+      } else {
+        showNotification(`✓ ${response.data.app_name} appears legitimate`, 'success');
+      }
     } catch (err) {
-      setError(err.response?.data?.detail || 'Failed to check the URL. Please try again.');
+      const errorMsg = err.response?.data?.detail || 'Failed to check the URL. Please try again.';
+      setError(errorMsg);
+      showNotification(errorMsg, 'error');
     } finally {
       setLoading(false);
     }
@@ -77,12 +123,18 @@ const QuickCheck = () => {
       <Paper elevation={3} sx={{ p: 4 }}>
         {/* Header */}
         <Box sx={{ textAlign: 'center', mb: 4 }}>
-          <ShieldIcon sx={{ fontSize: 60, color: '#1976d2', mb: 2 }} />
-          <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold' }}>
+          <ShieldIcon sx={{ fontSize: 60, color: '#667eea', mb: 2 }} />
+          <Typography variant="h4" gutterBottom sx={{ 
+            fontWeight: 'bold',
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}>
             Is This App Real or Fake?
           </Typography>
           <Typography variant="body1" color="text.secondary">
-            Paste any Google Play Store or App Store URL to check if it's legitimate
+            Paste any Google Play Store URL to verify authenticity instantly
           </Typography>
         </Box>
 
@@ -106,12 +158,47 @@ const QuickCheck = () => {
             size="large"
             startIcon={loading ? <CircularProgress size={20} color="inherit" /> : <SearchIcon />}
             onClick={handleCheck}
-            disabled={loading}
+            disabled={loading || !url.trim()}
             sx={{ mt: 2, py: 1.5, fontSize: '1.1rem' }}
           >
             {loading ? 'Checking...' : 'Check This App'}
           </Button>
         </Box>
+
+        {/* Recent Checks */}
+        {recentChecks.length > 0 && !result && (
+          <Box sx={{ mb: 3 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+              <HistoryIcon sx={{ mr: 1, color: '#667eea' }} />
+              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                Recent Checks
+              </Typography>
+            </Box>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+              {recentChecks.map((check, index) => (
+                <Tooltip key={index} title={`Checked ${new Date(check.timestamp).toLocaleString()}`}>
+                  <Chip
+                    label={check.app_name}
+                    size="small"
+                    color={check.is_fake ? 'error' : 'success'}
+                    variant="outlined"
+                    icon={check.is_fake ? <WarningIcon /> : <CheckCircleIcon />}
+                    onClick={() => {
+                      setUrl(`https://play.google.com/store/apps/details?id=${check.package_id}`);
+                      showNotification('URL loaded from history', 'info');
+                    }}
+                    deleteIcon={<RefreshIcon />}
+                    onDelete={() => {
+                      setUrl(`https://play.google.com/store/apps/details?id=${check.package_id}`);
+                      handleCheck();
+                    }}
+                    sx={{ cursor: 'pointer' }}
+                  />
+                </Tooltip>
+              ))}
+            </Box>
+          </Box>
+        )}
 
         {/* Error Message */}
         {error && (
@@ -205,7 +292,15 @@ const QuickCheck = () => {
 
               <Divider sx={{ my: 3 }} />
 
-              {/* Risk Score */}
+              {/* Risk Score with Badge */}
+              <Box sx={{ textAlign: 'center', my: 3 }}>
+                <Typography variant="h6" gutterBottom>
+                  Risk Assessment
+                </Typography>
+                <RiskBadge riskScore={result.risk_score} size="medium" />
+              </Box>
+
+              <Divider sx={{ my: 3 }} />
               <Box sx={{ mb: 3 }}>
                 <Typography variant="h6" gutterBottom>
                   Risk Assessment:
