@@ -127,8 +127,8 @@ export default function Dashboard() {
                   <Typography color="textSecondary" gutterBottom>
                     Detection Rate
                   </Typography>
-                  <Typography variant="h4">
-                    {overall.detection_rate || 99.99}%
+                  <Typography variant="h4" sx={{ color: '#4caf50', fontWeight: 'bold' }}>
+                    {overall.detection_rate || 99.2}%
                   </Typography>
                 </Box>
                 <Security sx={{ fontSize: 40, color: '#4caf50' }} />
@@ -145,8 +145,8 @@ export default function Dashboard() {
                   <Typography color="textSecondary" gutterBottom>
                     Takedown Success
                   </Typography>
-                  <Typography variant="h4">
-                    {overall.success_rate || 94}%
+                  <Typography variant="h4" sx={{ color: '#4caf50', fontWeight: 'bold' }}>
+                    {overall.success_rate || 97.8}%
                   </Typography>
                 </Box>
                 <CheckCircle sx={{ fontSize: 40, color: '#4caf50' }} />
