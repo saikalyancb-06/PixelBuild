@@ -55,7 +55,30 @@ export default function Layout({ children }) {
         }}
       >
         <Toolbar>
-          <SecurityIcon sx={{ mr: 2, fontSize: 32 }} />
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: 48,
+              height: 48,
+              borderRadius: '50%',
+              background: 'rgba(255, 255, 255, 0.2)',
+              backdropFilter: 'blur(10px)',
+              border: '2px solid rgba(255, 255, 255, 0.3)',
+              mr: 2,
+              transform: 'translateY(-2px)',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+              transition: 'all 0.3s ease',
+              '&:hover': {
+                transform: 'translateY(-4px)',
+                boxShadow: '0 6px 16px rgba(0, 0, 0, 0.2)',
+                background: 'rgba(255, 255, 255, 0.25)',
+              }
+            }}
+          >
+            <SecurityIcon sx={{ fontSize: 28, color: 'white' }} />
+          </Box>
           <Box>
             <Typography variant="h6" noWrap component="div" sx={{ fontWeight: 'bold', letterSpacing: 1 }}>
               ShieldGuard AI
@@ -85,6 +108,26 @@ export default function Layout({ children }) {
                   <ListItemButton
                     selected={location.pathname === item.path}
                     onClick={() => navigate(item.path)}
+                    sx={{
+                      '&.Mui-selected': {
+                        backgroundColor: 'rgba(102, 126, 234, 0.12)',
+                        borderLeft: '4px solid #667eea',
+                        '&:hover': {
+                          backgroundColor: 'rgba(102, 126, 234, 0.18)',
+                        },
+                        '& .MuiListItemIcon-root': {
+                          color: '#667eea',
+                        },
+                        '& .MuiListItemText-primary': {
+                          color: '#667eea',
+                          fontWeight: 600,
+                        }
+                      },
+                      '&:hover': {
+                        backgroundColor: 'rgba(102, 126, 234, 0.08)',
+                      },
+                      transition: 'all 0.3s ease',
+                    }}
                   >
                     <ListItemIcon>{item.icon}</ListItemIcon>
                     <ListItemText primary={item.text} />
